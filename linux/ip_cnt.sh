@@ -13,8 +13,10 @@ fi
 echo '日志文件: ' $filename
 
 reg='((25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])\.){3}(25[0-5]|2[0-4][0-9]|1[0-9]{2}|[1-9]?[0-9])'
-grep -o -E $reg $filename | sort > /tmp/logip0.txt
-cat /tmp/logip0.txt | uniq > /tmp/logip1.txt
+grep -o -E $reg $filename | sort | uniq -c | sort -nr | head -10
+
+'''
+grep -o -E $reg $filename | sort | uniq > /tmp/logip1.txt
 
 flag=0
 for line in `cat /tmp/logip1.txt`; do
@@ -29,3 +31,4 @@ for line in `cat /tmp/logip1.txt`; do
 done
 
 sort -rn /tmp/logip2.txt | head -10
+'''
